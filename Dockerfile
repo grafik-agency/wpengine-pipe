@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM node
 
 RUN apk add --update --no-cache bash
 
