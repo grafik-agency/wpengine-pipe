@@ -22,12 +22,14 @@ GIT_EMAIL=${GIT_EMAIL:?'GIT_EMAIL variable missing.'}
 GIT_NAME=${GIT_NAME:?'GIT_NAME variable missing.'}
 ARTIFACT=${ARTIFACT:?'ARTIFACT variable missing.'}
 
+info "Running wpengine pipe..."
+
 configure_ssh() {
     info "configuring ssh keys..."
-    mkdir -p ~/.ssh
-    cp /opt/atlassian/pipelines/agent/ssh/id_rsa_tmp ~/.ssh/id_rsa
-    cp /opt/atlassian/pipelines/agent/ssh/known_hosts ~/.ssh/known_hosts
-    chmod -R go-rwx ~/.ssh/
+        mkdir -p ~/.ssh
+        cp /opt/atlassian/pipelines/agent/ssh/id_rsa_tmp ~/.ssh/id_rsa
+        cp /opt/atlassian/pipelines/agent/ssh/known_hosts ~/.ssh/known_hosts
+        chmod -R go-rwx ~/.ssh/
 }
 configure_ssh
 
