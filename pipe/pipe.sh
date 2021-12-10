@@ -22,19 +22,20 @@ GIT_EMAIL=${GIT_EMAIL:?'GIT_EMAIL variable missing.'}
 GIT_NAME=${GIT_NAME:?'GIT_NAME variable missing.'}
 ARTIFACT=${ARTIFACT:?'ARTIFACT variable missing.'}
 
-backup_wpe_install() {
-    info "Backing up site before git push..."
-        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -H "Content-Type: application/json" -d '{"description": "Before Bitbucket deploy", "notification_emails": ["mmiller@grafik.com"]}' -u ${WPE_API_USER}:${WPE_API_PASSWORD}
-}
-backup_wpe_install
-
 configure_ssh() {
+    info "configuring ssh keys..."
     mkdir -p ~/.ssh
     cp /opt/atlassian/pipelines/agent/ssh/id_rsa_tmp ~/.ssh/id_rsa
     cp /opt/atlassian/pipelines/agent/ssh/known_hosts ~/.ssh/known_hosts
     chmod -R go-rwx ~/.ssh/
 }
 configure_ssh
+
+backup_wpe_install() {
+    info "Backing up site before git push..."
+        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -H "Content-Type: application/json" -d '{"description": "Before Bitbucket deploy", "notification_emails": ["mmiller@grafik.com"]}' -u ${WPE_API_USER}:${WPE_API_PASSWORD}
+}
+backup_wpe_install
 
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
