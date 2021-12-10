@@ -28,6 +28,14 @@ backup_wpe_install() {
 }
 backup_wpe_install
 
+configure_ssh() {
+    mkdir -p ~/.ssh
+    cp /opt/atlassian/pipelines/agent/ssh/id_rsa_tmp ~/.ssh/id_rsa
+    cp /opt/atlassian/pipelines/agent/ssh/known_hosts ~/.ssh/known_hosts
+    chmod -R go-rwx ~/.ssh/
+}
+configure_ssh
+
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         rm -rf .git

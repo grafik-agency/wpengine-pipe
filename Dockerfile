@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add --update --no-cache bash curl git ssh
+RUN apk add --update --no-cache bash curl git
 
 COPY pipe /
 COPY pipe.yml README.md /
