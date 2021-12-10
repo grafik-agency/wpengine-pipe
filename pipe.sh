@@ -11,6 +11,8 @@
 #   WPE_API_USER
 #   WPE_API_PASSWORD
 
+source "$(dirname "$0")/common.sh"
+
 # mandatory parameters
 WPE_REPO_URL=${WPE_REPO_URL:?'WPE_REPO_URL variable missing.'}
 WPE_INSTALL_ID=${WPE_INSTALL_ID:?'WPE_INSTALL_ID variable missing.'}
