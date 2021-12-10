@@ -6,7 +6,8 @@ RUN apk add --update --no-cache \
     git \
     openssh \
     sshpass \
-    grep
+    grep \
+    zip
 
 COPY pipe /
 COPY pipe.yml README.md /
