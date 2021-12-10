@@ -1,6 +1,12 @@
-FROM ubuntu:20.04
+FROM alpine
 
-RUN apt-get update
+RUN apk add --update --no-cache \
+    bash \
+    curl \
+    git \
+    openssh \
+    sshpass \
+    grep
 
 COPY pipe /
 COPY pipe.yml README.md /
