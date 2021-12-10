@@ -23,4 +23,7 @@ Add a step to your pipeline and include the pipe like below (replace the values 
 
 The script will create a backup of your site before pushing. After that it will unzip the artifact and push it to the repo forcefully.
 
-You can get the install ID by via the wpengine API.
+## Tips
+
+- Backup notificaitons are sent to the git email
+- You can get the install ID by via the wpengine API.

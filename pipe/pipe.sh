@@ -34,8 +34,13 @@ configure_ssh() {
 configure_ssh
 
 backup_wpe_install() {
+    printf -v data -- '{"description": "Before Bitbucket deploy", "notification_emails": ["%s"]}' \
+    "${GIT_EMAIL}"
     info "Backing up site before git push..."
-        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -H "Content-Type: application/json" -d '{"description": "Before Bitbucket deploy", "notification_emails": ["mmiller@grafik.com"]}' -u ${WPE_API_USER}:${WPE_API_PASSWORD}
+        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" \
+            -H "Content-Type: application/json" \
+            -d "data" \
+            -u ${WPE_API_USER}:${WPE_API_PASSWORD}
 }
 backup_wpe_install
 
