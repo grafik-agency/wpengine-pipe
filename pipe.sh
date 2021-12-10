@@ -22,6 +22,8 @@ GIT_EMAIL=${GIT_EMAIL:?'GIT_EMAIL variable missing.'}
 GIT_NAME=${GIT_NAME:?'GIT_NAME variable missing.'}
 ARTIFACT=${ARTIFACT:?'ARTIFACT variable missing.'}
 
+apt install curl
+
 backup_wpe_install() {
     info "Backing up site before git push..."
         curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -u ${WPE_API_USER}:${WPE_API_PASSWORD}
