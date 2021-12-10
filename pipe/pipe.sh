@@ -41,22 +41,27 @@ backup_wpe_install() {
             -H "Content-Type: application/json" \
             -d "$data" \
             -u ${WPE_API_USER}:${WPE_API_PASSWORD}
+    success "Request to backup successful!"
 }
 backup_wpe_install
 
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
+        info "Configuring git..."
         rm -rf .git
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
+        info "Cloning remote repository..."
         git clone ${WPE_REPO_URL} deploy
         mv ${ARTIFACT} .gitignore README.md deploy
         cd deploy
         ls | grep -v ${ARTIFACT} | grep -v .gitignore | grep -v README.md | xargs rm -rf
         unzip ${ARTIFACT}
         git status
-        git add . && git commit -m "$BITBUCKET_COMMIT"
+        git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
 push_to_wpe
+
+success "Successfuly synced files with wpengine!"
