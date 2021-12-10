@@ -24,7 +24,7 @@ ARTIFACT=${ARTIFACT:?'ARTIFACT variable missing.'}
 
 backup_wpe_install() {
     info "Backing up site before git push..."
-        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -u $WPE_API_USER:$WPE_API_PASSWORD
+        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" -u ${WPE_API_USER}:${WPE_API_PASSWORD}
 }
 backup_wpe_install
 
@@ -33,13 +33,13 @@ push_to_wpe() {
         rm -rf .git
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
-        git clone git@git.wpengine.com:production/$WPE_REPO_URL deploy
-        mv $ARTIFACT .gitignore README.md deploy
+        git clone git@git.wpengine.com:production/${WPE_REPO_URL} deploy
+        mv ${ARTIFACT} .gitignore README.md deploy
         rm -rf `ls --ignore=${ARTIFACT} --ignore=.gitignore --ignore=README.md`
-        unzip $ARTIFACT
+        unzip ${ARTIFACT}
         git status
         git add . && git commit -m "$BITBUCKET_COMMIT"
         git push origin master
-        git push -f $WPE_REPO_URL
+        git push -f ${WPE_REPO_URL}
 }
 push_to_wpe
