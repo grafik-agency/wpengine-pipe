@@ -44,7 +44,7 @@ push_to_wpe() {
         rm -rf .git
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
-        git clone git@git.wpengine.com:production/${WPE_REPO_URL} deploy
+        git clone ${WPE_REPO_URL} deploy
         mv ${ARTIFACT} .gitignore README.md deploy
         rm -rf `ls --ignore=${ARTIFACT} --ignore=.gitignore --ignore=README.md`
         unzip ${ARTIFACT}
