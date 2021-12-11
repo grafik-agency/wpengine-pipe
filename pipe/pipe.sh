@@ -61,13 +61,15 @@ backup_wpe_install() {
     STATUS=$(curl --write-out "%{http_code}\n" -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" \
         -H "Content-Type: application/json" \
         -d "$data" \
-        -u ${WPE_API_USER}:${WPE_API_PASSWORD})
-    if [ $STATUS == 200 ]
-    then
-        success "$STATUS: Successfuly created a backup!"
-        push_to_wpe
-    else
-        fail "$STATUS: failed to created a backup!"
+        -u ${WPE_API_USER}:${WPE_API_PASSWORD} \
+        --output output.txt --silent)
+    if [ "$STATUS" == 200 ]
+        then
+            success "$STATUS: Successfuly created a backup!"
+            push_to_wpe
+        else
+            fail "$STATUS: failed to created a backup!"
+    fi
 }
 backup_wpe_install
 
