@@ -12,12 +12,12 @@ Add a step to your pipeline and include the pipe like below (replace the values 
     script:
       - pipe: docker://grafikdev/wpengine-pipe:latest
         variables:
-          WPE_API_USER: $WPE_API_USER
-          WPE_API_PASSWORD: $WPE_API_PASSWORD
-          WPE_INSTALL_ID: $WPE_INSTALL_ID
+          WPE_API_USER: $WPE_API_USER ######### these three need
+          WPE_API_PASSWORD: $WPE_API_PASSWORD # to be added to 
+          WPE_INSTALL_ID: $WPE_INSTALL_ID ##### Repository variables
           WPE_REPO_URL: git@git.wpengine.com:production/<wpe_repo>.git
-          GIT_EMAIL: <git_email>
-          GIT_NAME: <git_name>
+          GIT_EMAIL: <git_email> # notified of backup
+          GIT_NAME: <git_name> # can be anything
           ARTIFACT: temp.zip # must be a zip file
 ```
 
