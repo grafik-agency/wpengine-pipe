@@ -63,7 +63,7 @@ backup_wpe_install() {
         -d "$data" \
         -u ${WPE_API_USER}:${WPE_API_PASSWORD} \
         --output output.txt --silent)
-    if [ "$STATUS" == 200 ]
+    if [ "$STATUS" == 202 ]
         then
             success "$STATUS: Successfuly created a backup!"
             push_to_wpe
