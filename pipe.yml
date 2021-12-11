@@ -6,9 +6,6 @@ repository: https://bitbucket.org/2120creative/wpengine-pipe/src/master/
 maintainer:
   name: Grafik
   website: https://grafik.agency/
-vendor:
-  name: WP Engine
-  website: https://wpengine.com/
 variables:
   - name: WPE_REPO_URL
     default: $WPE_REPO_URL
