@@ -25,5 +25,5 @@ The script will create a backup of your site before pushing. After that it will 
 
 ## Tips
 
-- Backup notificaitons are sent to the git email
+- Backup notifications are sent to the git email
 - You can get the install ID by via the wpengine API.
