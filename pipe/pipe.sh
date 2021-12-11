@@ -24,6 +24,7 @@ ARTIFACT=${ARTIFACT:?'ARTIFACT variable missing.'}
 
 info "Running wpengine pipe..."
 
+# copies repo ssh keys into pipe image
 configure_ssh() {
     info "configuring ssh keys..."
         mkdir -p ~/.ssh
@@ -33,18 +34,7 @@ configure_ssh() {
 }
 configure_ssh
 
-backup_wpe_install() {
-    printf -v data -- '{"description": "Before Bitbucket deploy", "notification_emails": ["%s"]}' \
-    "${GIT_EMAIL}"
-    info "Backing up site before git push..."
-        curl -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" \
-            -H "Content-Type: application/json" \
-            -d "$data" \
-            -u ${WPE_API_USER}:${WPE_API_PASSWORD}
-    success "Request to backup successful!"
-}
-backup_wpe_install
-
+# pushes artifact into target remote 
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
@@ -62,6 +52,23 @@ push_to_wpe() {
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
-push_to_wpe
+
+# takes a backup of target install
+backup_wpe_install() {
+    printf -v data -- '{"description": "Before Bitbucket deploy", "notification_emails": ["%s"]}' \
+    "${GIT_EMAIL}"
+    info "Backing up site before git push..."
+    STATUS=$(curl --write-out "%{http_code}\n" -X POST "https://api.wpengineapi.com/v1/installs/${WPE_INSTALL_ID}/backups" \
+        -H "Content-Type: application/json" \
+        -d "$data" \
+        -u ${WPE_API_USER}:${WPE_API_PASSWORD})
+    if [ $STATUS == 200 ]
+    then
+        success "$STATUS: Successfuly created a backup!"
+        push_to_wpe
+    else
+        fail "$STATUS: failed to created a backup!"
+}
+backup_wpe_install
 
 success "Successfuly synced files with wpengine!"
