@@ -38,19 +38,21 @@ configure_ssh
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
+        git config --global init.defaultBranch main
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
-        info "Cloning remote repository..."
         mkdir deploy
         mv ${ARTIFACT} deploy
         cd deploy
-        git init
         ls | grep -v ${ARTIFACT} | xargs rm -rf
+        info "Unzipping artifact..."
         unzip ${ARTIFACT}
+        success "Successfuly unzipped artifact!"
+        git init
         git remote add origin ${WPE_REPO_URL}
         git status
         git commit -m "$BITBUCKET_COMMIT" -a
-        git push origin master
+        git push origin main
         git push -f ${WPE_REPO_URL}
 }
 
