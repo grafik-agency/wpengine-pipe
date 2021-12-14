@@ -58,6 +58,7 @@ push_to_wpe() {
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git rm -r --cached .
+        git add ./wp-content
         git commit -m "$BITBUCKET_COMMIT" -a
         git status
         git push origin master
