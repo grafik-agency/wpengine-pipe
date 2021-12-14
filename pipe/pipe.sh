@@ -54,7 +54,7 @@ push_to_wpe() {
         success "Artifact has been moved to deploy"
         cd deploy
         info "Clearing <deploy> directory"
-        ls | grep -v ${ARTIFACT} | grep -v .gitignore | xargs rm -rf
+        ls | grep -v ${ARTIFACT} | xargs rm -rf
         success "Directory cleared!"
         info "Unzipping artifact..."
         unzip ${ARTIFACT}
