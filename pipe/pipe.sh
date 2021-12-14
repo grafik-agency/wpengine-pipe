@@ -38,6 +38,7 @@ configure_ssh
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
+        rm -rf .git
         git config --global init.defaultBranch "main"
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
