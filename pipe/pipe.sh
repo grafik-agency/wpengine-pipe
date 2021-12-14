@@ -53,11 +53,12 @@ push_to_wpe() {
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         ls
+        git add . && git commit -m "$BITBUCKET_COMMIT" -a
         git status
-        git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
+
 
 # takes a backup of target install
 backup_wpe_install() {
