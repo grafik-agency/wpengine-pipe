@@ -53,11 +53,8 @@ push_to_wpe() {
         mv ${ARTIFACT} deploy
         success "Artifact has been moved to deploy"
         cd deploy
-        info "Clearing <deploy> directory"
-        ls | grep -v ${ARTIFACT} | xargs rm -rf
-        success "Directory cleared!"
         info "Unzipping artifact..."
-        unzip ${ARTIFACT}
+        unzip -o ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git status
         git commit -m "$BITBUCKET_COMMIT" -a
