@@ -47,7 +47,6 @@ push_to_wpe() {
         info "Unzipping artifact..."
         unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
-        rm -rf .git
         success "Successfuly unzipped artifact!"
         ls
         git init
