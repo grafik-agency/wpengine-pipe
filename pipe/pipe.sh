@@ -55,9 +55,10 @@ push_to_wpe() {
         ls | grep -v ${ARTIFACT} | xargs rm -rf 
         info "Unzipping artifact..."
         unzip ${ARTIFACT}
+        rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git status
-        git add . && git commit -m "$BITBUCKET_COMMIT" -a
+        git add -A && git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
