@@ -46,14 +46,13 @@ push_to_wpe() {
         info "Moving artifact into cloned repository..."
         mv ${ARTIFACT} deploy
         cd deploy
-        ls
         success "Artifact has been moved to deploy"
         info "Unzipping artifact..."
         unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         ls
-        git add . && git commit -m "$BITBUCKET_COMMIT" -a
+        git add * && git commit -m "$BITBUCKET_COMMIT" -a
         git status
         git push origin master
         git push -f ${WPE_REPO_URL}
