@@ -44,21 +44,17 @@ push_to_wpe() {
         info "Cloning remote repository..."
         git clone ${WPE_REPO_URL} deploy
         info "Moving artifact into cloned repository..."
-
-        if [ -f .gitignore ]
-            then
-                mv .gitignore deploy/
-        fi
-
-        mv ${ARTIFACT} deploy/ && cd deploy
+        mv ${ARTIFACT} deploy
+        cd deploy
+        ls
         success "Artifact has been moved to deploy"
         info "Unzipping artifact..."
         unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
-        git add .
-        git commit -m "$BITBUCKET_COMMIT" -a
+        ls
         git status
+        git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
