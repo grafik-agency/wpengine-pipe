@@ -56,7 +56,6 @@ push_to_wpe() {
         unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
-        git rm -r --cached .
         git add ./wp-content
         git commit -m "$BITBUCKET_COMMIT" -a
         git status
