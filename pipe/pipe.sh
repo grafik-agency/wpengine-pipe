@@ -43,6 +43,7 @@ push_to_wpe() {
         git config --global user.email "${GIT_NAME}"
         info "Cloning remote repository..."
         git clone ${WPE_REPO_URL} deploy
+        info "Moving artifact into cloned repository..."
         mv ${ARTIFACT} .gitignore README.md deploy
         cd deploy
         ls | grep -v ${ARTIFACT} | grep -v .gitignore | grep -v README.md | xargs rm -rf
