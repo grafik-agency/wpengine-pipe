@@ -52,6 +52,7 @@ push_to_wpe() {
         ls
         git init
         git remote add origin ${WPE_REPO_URL}
+        git add .
         git branch -M master
         git commit -m "$BITBUCKET_COMMIT"
         git push -uf ${WPE_REPO_URL}
