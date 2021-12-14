@@ -39,22 +39,19 @@ push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
         rm -rf .git
-        git config --global init.defaultBranch "main"
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
-        info "Creating local <deploy> directory"
-        mkdir deploy
-        mv ${ARTIFACT} deploy
+        info "Cloning remote repository..."
+        git clone ${WPE_REPO_URL} deploy
+        mv ${ARTIFACT} .gitignore README.md deploy
         cd deploy
-        ls | grep -v ${ARTIFACT} | xargs rm -rf
+        ls | grep -v ${ARTIFACT} | grep -v .gitignore | grep -v README.md | xargs rm -rf
         info "Unzipping artifact..."
         unzip ${ARTIFACT}
         success "Successfuly unzipped artifact!"
-        git init
-        git remote add origin ${WPE_REPO_URL}
         git status
         git commit -m "$BITBUCKET_COMMIT" -a
-        git push origin main
+        git push origin master
         git push -f ${WPE_REPO_URL}
 }
 
