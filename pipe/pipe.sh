@@ -38,9 +38,10 @@ configure_ssh
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
-        git config --global init.defaultBranch main
+        git config --global init.defaultBranch "main"
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
+        info "Creating local <deploy> directory"
         mkdir deploy
         mv ${ARTIFACT} deploy
         cd deploy
