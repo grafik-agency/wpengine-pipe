@@ -41,9 +41,7 @@ push_to_wpe() {
         rm -rf .git
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
-        info "Cloning remote repository..."
-        git clone ${WPE_REPO_URL} deploy
-        info "Moving artifact into cloned repository..."
+        mkdir deploy
         mv ${ARTIFACT} deploy
         cd deploy
         success "Artifact has been moved to deploy"
@@ -52,10 +50,11 @@ push_to_wpe() {
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         ls
-        git add * && git commit -m "$BITBUCKET_COMMIT" -a
-        git status
-        git push origin master
-        git push -f ${WPE_REPO_URL}
+        git init
+        git remote add origin ${WPE_REPO_URL}
+        git branch -M master
+        git commit -m "$BITBUCKET_COMMIT"
+        git push -uf ${WPE_REPO_URL}
 }
 
 
