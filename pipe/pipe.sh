@@ -51,9 +51,11 @@ push_to_wpe() {
         fi
 
         mv ${ARTIFACT} deploy
-        success "Successfuly moved artifact!"
+        success "Artifact has been moved to deploy"
         cd deploy
+        info "Clearing <deploy> directory"
         ls | grep -v ${ARTIFACT} | grep -v .gitignore | xargs rm -rf
+        success "Directory cleared!"
         info "Unzipping artifact..."
         unzip ${ARTIFACT}
         success "Successfuly unzipped artifact!"
