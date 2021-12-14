@@ -52,9 +52,8 @@ push_to_wpe() {
 
         mv ${ARTIFACT} deploy/ && cd deploy
         success "Artifact has been moved to deploy"
-        ls | grep -v ${ARTIFACT} | xargs rm -rf 
         info "Unzipping artifact..."
-        unzip ${ARTIFACT}
+        unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git rm -r --cached .
