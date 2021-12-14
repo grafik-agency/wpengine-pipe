@@ -38,7 +38,6 @@ configure_ssh
 push_to_wpe() {
     info "Deploying to to ${WPE_REPO_URL}..."
         info "Configuring git..."
-        rm -rf .git
         git config --global user.email "${GIT_EMAIL}"
         git config --global user.email "${GIT_NAME}"
         mkdir deploy
@@ -48,6 +47,7 @@ push_to_wpe() {
         info "Unzipping artifact..."
         unzip -o ${ARTIFACT}
         rm -rf ${ARTIFACT}
+        rm -rf .git
         success "Successfuly unzipped artifact!"
         ls
         git init
