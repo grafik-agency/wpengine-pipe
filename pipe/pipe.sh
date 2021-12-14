@@ -47,18 +47,17 @@ push_to_wpe() {
 
         if [ -f .gitignore ]
             then
-                mv .gitignore deploy
+                mv .gitignore deploy/
         fi
 
-        mv ${ARTIFACT} deploy
+        mv ${ARTIFACT} deploy/ && cd deploy
         success "Artifact has been moved to deploy"
-        cd deploy
+        ls | grep -v ${ARTIFACT} | xargs rm -rf 
         info "Unzipping artifact..."
-        unzip -o ${ARTIFACT}
+        unzip ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git status
-        git add wp-content/\*
-        git commit -m "$BITBUCKET_COMMIT" -a
+        git add . && git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
