@@ -57,6 +57,7 @@ push_to_wpe() {
         unzip -o ${ARTIFACT}
         success "Successfuly unzipped artifact!"
         git status
+        git add wp-content
         git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
