@@ -57,8 +57,9 @@ push_to_wpe() {
         unzip ${ARTIFACT}
         rm -rf ${ARTIFACT}
         success "Successfuly unzipped artifact!"
+        git rm -r --cached .
+        git add . && git commit -m "$BITBUCKET_COMMIT"
         git status
-        git add -A && git commit -m "$BITBUCKET_COMMIT" -a
         git push origin master
         git push -f ${WPE_REPO_URL}
 }
