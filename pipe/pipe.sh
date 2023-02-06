@@ -73,7 +73,7 @@ backup_wpe_install() {
             success "$STATUS: Successfuly created a backup!"
             push_to_wpe
         else
-            fail "$STATUS: failed to created a backup!"
+            fail "$STATUS: failed to create a backup!"
     fi
 }
 backup_wpe_install
